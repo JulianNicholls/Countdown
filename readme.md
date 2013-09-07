@@ -1,13 +1,13 @@
 # Countdown
 
 This is a word finder for the UK (originally French) TV gameshow 
-[Countdpown](http://en.wikipedia.org/wiki/Countdown_%28game_show%29).
+[Countdown](http://en.wikipedia.org/wiki/Countdown_%28game_show%29).
 
 ## Word list
 
-It uses a wordlist constructed from
+It uses a word list constructed from
 Kevin Atkinson's [wordlist page](http://wordlist.sourceforge.net/). 
-I have included the whole Copyright file that comes with the download, since
+I have included the whole copyright file that comes with the download, since
 all the component word lists have ultimately been placed in the public domain, 
 but there are a number of different statements of copyright contained. Clearly,
 I am deeply in Kevin's debt for the word list and acknowledge the sterling work
