@@ -14,10 +14,10 @@ require './countdownword'
 
 class CountdownWordList
 
-  # Initialise the array from a word list file, defaulting to words.txt
+  # Initialise the array from a word list file, defaulting to cwords.txt
   
   def initialize( filename = nil )
-    fn     = filename || 'words.txt'
+    fn     = filename || 'cwords.txt'
     @words = {};
         
     File.foreach( fn ) do |line|
