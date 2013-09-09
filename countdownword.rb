@@ -4,8 +4,6 @@
 
 class CountdownWord
 
-  attr_reader :word   # Only necessary for the comparison operator
-
   # Initialize with the word, defaults to lazy evaluation of the letter map.
   
   def initialize( word, map_word = false )
@@ -32,9 +30,9 @@ class CountdownWord
     
     # Work through the word, checking if the candidate letters could build it.
     
-    @wmap.keys.each do |l|
+    @wmap.each_key do |l|
       # If the letter list either doesn't have any of the current letter, 
-      # or not enough, then it can't be made from those letters
+      # or not enough, then it can't be made from those letters.
       
       return false if cand[l].nil? || cand[l] < @wmap[l]  
     end
@@ -50,27 +48,27 @@ class CountdownWord
   end
   
   
-  # Perform a comparison, by decreasing length, then alphabetically
+  # Perform a comparison, by decreasing length, then alphabetically.  
+  # See readme.md for an interesting aside about operator <=>
   
   def <=>( b )
-    comp = b.word.length - @word.length
+    other = b.to_s
+    comp  = other.length - @word.length
     
     if comp == 0        # Same length, sort alphabetically
-      return -1 if @word < b.word
-      return 1  if @word > b.word
-      
-      return 0
+      return -1 if @word < other
+      return 1  if @word > other
     end
   
     # One or other is longer, so return that
     
-    (comp < 0) ? -1 : 1
+    comp
   end
   
   
   # This is the key to the whole thing. It returns a map of the used letters, thus:
   # Word      Map
-  # belabour  { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1}
+  # belabour  { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1 }
   # resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
   
   def self.lettermap( word )

@@ -13,16 +13,16 @@ but there are a number of different statements of copyright contained. Clearly,
 I am deeply in Kevin's debt for the word list and acknowledge the sterling work
 that he has done.
 
-The wordlist that I have chosen to construct from his files is:
+The word list that I have chosen to construct from his files is:
 
 - Level 80, with...
 - English and British up to variant 1.
-- No abbreviations, proper names, Roman numerals, and hacker words. 
+- No possessives ('s), abbreviations, proper names, Roman numerals, or hacker words. 
 - Word lengths 5 to 9.
 
-I'd say that the wordlist seems to be at about the right level, because 
-when Susie Dent uses the pen camera on the dictionary, the word has been found by
-this prpgram as one of the longest words.
+I'd say that the word list seems to be at about the right level, because 
+when Susie Dent uses the pen camera on the dictionary, the word has so far 
+been found by this prpgram as one of the longest words.
 
 ## Bonuses
 
@@ -34,3 +34,15 @@ developed this, that it works just as well for:
 
 It will also work for anagrams, as long as the solution is one word of 
 9 letters, at most.
+
+### Operator <=> overloading
+
+The definition for the <=> operator in built-in classes explicitly states that 
+it returns -1, 0, and +1 for the three comparison possibilities.
+
+it seems that overriding the operator only requires that the return value is <0, 0, or >0.
+I couldn't find this documented anywhere on the net after much searching, but 
+I tried it in the end and it seems to work for sort().
+
+Subsequently, I looked at the source code for ruby_qsort() and the comparisons 
+made are all against 0, so a negative, zero, or positive quantity is fine.
