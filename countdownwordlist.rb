@@ -24,14 +24,14 @@ class CountdownWordList
       idx = line[0]
       
       @words[idx] = Array.new if @words[idx].nil?
-      @words[idx] << CountdownWord.new( line.chomp(), false )
+      @words[idx] << CountdownWord.new( line.chomp )
     end
   end
   
   # Get the list of words that can be built from the passed letters
   
   def words_from( letters )
-    # Find the unique letters, and also built the letter map for the letters.
+    # Find the unique letters, and also build the letter map for the letters.
     
     uniqs = letters.split(//).uniq
     lmap  = CountdownWord::lettermap( letters )
@@ -43,8 +43,8 @@ class CountdownWordList
       @words[l].select { |w| w.can_be_made_from( lmap ) }
     end
     
-    # Flatten out the resulting array of arrays resulting from map, and sort 
-    # by length, longest first
+    # Flatten out the array of arrays resulting from map, and sort by length, 
+    # longest first
     
     list.flatten.sort
   end
@@ -52,7 +52,7 @@ class CountdownWordList
   # Show the number of words in each letter section of the hash.
   
   def debug
-    @words.each_key { |ltr| puts "#{ltr}: #{@words[ltr].length}" }
+    @words.each_key { |ltr| puts "#{ltr.upcase}: #{@words[ltr].length}" }
   end
 
 end
