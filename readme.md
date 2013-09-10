@@ -22,7 +22,7 @@ The word list that I have chosen to construct from his files is:
 
 I'd say that the word list seems to be at about the right level, because 
 when Susie Dent uses the pen camera on the dictionary, the word has so far 
-been found by this prpgram as one of the longest words.
+been found by this program as one of the longest words.
 
 ## Bonuses
 
@@ -32,15 +32,15 @@ developed this, that it works just as well for:
 - The teatime teasers at the end of each segment.
 - The final conundrum round.
 
-It will also work for anagrams, as long as the solution is one word of 
-9 letters, at most.
+It will also work for crossword anagrams, as long as the solution is one word
+of 9 letters, at most.
 
 ### Operator <=> overloading
 
 The definition for the <=> operator in built-in classes explicitly states that 
 it returns -1, 0, and +1 for the three comparison possibilities.
 
-it seems that overriding the operator only requires that the return value is <0, 0, or >0.
+It seems that overriding the operator only requires that the return value is \<0, 0, or \>0.
 I couldn't find this documented anywhere on the net after much searching, but 
 I tried it in the end and it seems to work for sort().
 
