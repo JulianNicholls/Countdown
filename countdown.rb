@@ -76,7 +76,7 @@ end
 def go_again
   yesno = 'q'
   
-  while !('YN'.include? yesno)
+  until 'YN'.include? yesno
     print "\n\nAgain? "
     yesno = gets[0].upcase
   end
