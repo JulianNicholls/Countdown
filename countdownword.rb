@@ -75,8 +75,8 @@ class CountdownWord
     m = {}    # Empty map
     
     word.each_char do |l| 
-      m[l] = 0 if m[l].nil?   # Add new letter
-      m[l] += 1               # Count 1 more
+      m[l] ||= 0  # Add new letter
+      m[l] += 1   # Count 1 more
     end
     
     m         # Return map

@@ -23,7 +23,7 @@ class CountdownWordList
     File.foreach( fn ) do |line|
       idx = line[0]
       
-      @words[idx] = Array.new if @words[idx].nil?
+      @words[idx] ||= []
       @words[idx] << CountdownWord.new( line.chomp )
     end
   end
@@ -39,8 +39,8 @@ class CountdownWordList
     # Work through the unique letters, testing each word in the letter lists
     # against the passed letters
     
-    list = uniqs.map do |l| 
-      @words[l].select { |w| w.can_be_made_from( lmap ) }
+    list = uniqs.map do |let| 
+      @words[let].select { |w| w.can_be_made_from( lmap ) }
     end
     
     # Flatten out the array of arrays resulting from map, and sort by length, 
