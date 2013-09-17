@@ -8,7 +8,7 @@ class CountdownWord
   
   def initialize( word, map_word = false )
     @word = word
-    @wmap = map_word ? letter_map( word ) : {}
+    @wmap = map_word ? letter_map( word ) : nil
   end
 
   
@@ -26,15 +26,15 @@ class CountdownWord
     # If the current word hasn't been lettermap'ed yet, then do it now and 
     # store it for next time.
     
-    @wmap = CountdownWord::lettermap( @word ) if @wmap.empty?  
+    @wmap ||= CountdownWord::lettermap( @word )
     
     # Work through the word, checking if the candidate letters could build it.
     
-    @wmap.each_key do |l|
+    @wmap.each_key do |let|
       # If the letter list either doesn't have any of the current letter, 
       # or not enough, then it can't be made from those letters.
       
-      return false if cand[l].nil? || cand[l] < @wmap[l]  
+      return false if cand[let].nil? || cand[let] < @wmap[let]  
     end
     
     true  # To have fallen through here, it must be possible
@@ -72,14 +72,11 @@ class CountdownWord
   # resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
   
   def self.lettermap( word )
-    m = {}    # Empty map
+    lmap = Hash.new { 0 }   # Empty map with automatic 0s
     
-    word.each_char do |l| 
-      m[l] ||= 0  # Add new letter
-      m[l] += 1   # Count 1 more
-    end
+    word.each_char { |let| lmap[let] += 1 }         # Count 1 more
     
-    m         # Return map
+    lmap         # Return map
   end
   
 end
