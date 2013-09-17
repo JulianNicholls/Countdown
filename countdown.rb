@@ -1,10 +1,15 @@
+require "term/ansicolor"
+
 require './countdownwordlist'
+
+include Term::ANSIColor
+
 
 #----------------------------------------------------------------------------
 # Load the words from the word list file
 
 def load_wordlist
-  print "Loading... "
+  print yellow { bold { "Loading... " } }
 
   list = CountdownWordList.new
 
@@ -16,6 +21,7 @@ def load_wordlist
   list
 end
 
+
 #----------------------------------------------------------------------------
 # Get the letters from the user
 
@@ -23,27 +29,29 @@ def get_letters
   letters = ''
   
   while letters.length < 8
-    print "\nLetters: "
+    print cyan { bold { "\nLetters: " } }
     letters = gets.strip.downcase
   end
   
   letters
 end
 
+
 #----------------------------------------------------------------------------
 # Search for words in the list that can be built from the letters
 
 def search( list, letters )
-  print "\nSearching... "
+  print red { bold { "\nSearching... " } }
   
   start    = Time.now
   wordlist = list.words_from( letters )
   finish   = Time.now
   
-  printf "%.3fs, %d Words",  finish - start, wordlist.length
+  printf red { bold { "%.3fs, %d Words" } },  finish - start, wordlist.length
   
   wordlist
 end
+
 
 #----------------------------------------------------------------------------
 # Show the list of buildable words.
@@ -57,11 +65,11 @@ def show list
     
     if w.length < cur_len   # Word length has changed, start a new sub-list
       cur_len = w.length
-      print "\n\n#{cur_len} Letters: "
+      print yellow { bold { "\n\n#{cur_len} Letters: " } }
       column = 11
     end
     
-    print "#{w}, "
+    print cyan { bold { "#{w}, " } }
     column += cur_len + 2
     if column > 77 - cur_len
       puts
@@ -77,7 +85,7 @@ def go_again
   yesno = 'q'
   
   until 'YN'.include? yesno
-    print "\n\nAgain? "
+    print yellow { bold { "\n\nAgain? " } }
     yesno = gets[0].upcase
   end
   
@@ -97,5 +105,3 @@ while again
   show thewords                       # List all the words, split by length
   again = go_again                    # Ask the user if they want to go again
 end
-
-
