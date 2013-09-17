@@ -15,16 +15,14 @@ require './countdownword'
 class CountdownWordList
 
   # Initialise the array from a word list file, defaulting to cwords.txt
+  # using magic hash key array creation thing learnt from Ruby Koans
   
   def initialize( filename = nil )
     fn     = filename || 'cwords.txt'
-    @words = {};
+    @words = Hash.new { |hash, key| hash[key] = [] }
         
     File.foreach( fn ) do |line|
-      idx = line[0]
-      
-      @words[idx] ||= []
-      @words[idx] << CountdownWord.new( line.chomp )
+      @words[line[0]] << CountdownWord.new( line.chomp )
     end
   end
   
@@ -40,7 +38,7 @@ class CountdownWordList
     # against the passed letters
     
     list = uniqs.map do |let| 
-      @words[let].select { |w| w.can_be_made_from( lmap ) }
+      @words[let].select { |word| word.can_be_made_from( lmap ) }
     end
     
     # Flatten out the array of arrays resulting from map, and sort by length, 
@@ -56,4 +54,3 @@ class CountdownWordList
   end
 
 end
-
