@@ -35,6 +35,12 @@ developed this, that it works just as well for:
 It will also work for crossword anagrams, as long as the solution is one word
 of 9 letters, at most.
 
+## Sinatra
+
+There is now a very simple web version using [Sinatra](http://sinatrarb.com), 
+[Slim](http://slim-lang.com/), and [SASS](http://sass-lang.com/). The words
+are returned via AJAX using [jQuery](http://jquery.com) in JSON format.
+
 ### Operator <=> overloading
 
 The definition for the <=> operator in built-in classes explicitly states that 
@@ -46,3 +52,4 @@ I tried it in the end and it seems to work for sort().
 
 Subsequently, I looked at the source code for ruby_qsort() and the comparisons 
 made are all against 0, so a negative, zero, or positive quantity is fine.
+
