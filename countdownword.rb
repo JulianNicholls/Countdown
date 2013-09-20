@@ -6,9 +6,9 @@ class CountdownWord
 
   # Initialize with the word, defaults to lazy evaluation of the letter map.
   
-  def initialize( word, map_word = false )
-    @word = word
-    @wmap = map_word ? letter_map( word ) : nil
+  def initialize( word, map_word = :dont_map )
+    @word = word.downcase
+    @wmap = (map_word == :map) ? letter_map( word ) : nil
   end
 
   

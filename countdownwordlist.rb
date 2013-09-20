@@ -31,6 +31,7 @@ class CountdownWordList
   def words_from( letters )
     # Find the unique letters, and also build the letter map for the letters.
     
+    letters.downcase!
     uniqs = letters.split(//).uniq
     lmap  = CountdownWord::lettermap( letters )
     
@@ -50,7 +51,7 @@ class CountdownWordList
   # Show the number of words in each letter section of the hash.
   
   def debug
-    @words.each_key { |ltr| puts "#{ltr.upcase}: #{@words[ltr].length}" }
+    @words.each_key { |ltr| printf "%c: %5d\n", ltr.upcase, @words[ltr].length }
   end
 
 end
