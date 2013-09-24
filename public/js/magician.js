@@ -5,48 +5,57 @@
 $(function() {
 
     $("form").submit( function() {
-        var $ltr    = $("#letters"),
-            letters = $ltr.val();
-        
-        $ltr.val( letters.toUpperCase() );
-        
         $("div.holder").slideUp( 400 );
+        $(".container").append( '<p class="wait">Searching...</p>' );
         
-        $.getJSON( '/words/' + letters, function( data ) {
-            var words = data.words;
-            var time  = '<div class="holder"><div class="header">' + 
-                  words.length + ' words in ' + data.time + 
-                  ' seconds</div></div>';
-
-            $(".container").append( time );
-
-            var len     = 10;
-            var wstring = '';
-            
-            for( i = 0; i < words.length; ++i ) {
-                var w = words[i].toUpperCase();
-                
-                if( w.length != len ) {
-                    if( wstring.length )
-                        insert_div( wstring, len );
-
-                    len     = w.length;
-                    wstring = w;
-                }
-                else
-                    wstring += ', ' + w;
-            }
-
-            insert_div( wstring, len );
-        });
+        $.getJSON( '/words/' + $("#letters").val(), field_words );
         
         return false;
     });
 });
 
+
+function field_words( data ) {
+    var words  = data.words,
+        nWords = words.length;
+        
+    var time  = '<div class="holder"><div class="header">' + nWords +
+        ' words in ' + data.time + ' seconds</div></div>';
+
+    $("p.wait").remove();
+    $(".container").append( time );
+
+    var len     = 10,
+        wstring = '';
+    
+    for( i = 0; i < nWords; ++i ) {
+        var w = words[i].toUpperCase();
+        
+        if( w.length != len ) {
+            if( wstring.length )
+                insert_div( wstring, len );
+
+            len     = w.length;
+            wstring = dict_link( w );
+        }
+        else
+            wstring += ', ' + dict_link( w );
+    }
+
+    insert_div( wstring, len );
+}
+
+
 function insert_div( wstring, len ) {
     var len = worddiv = '<div class="holder"><div class="header">' + len +
-          '-letter words</div><p>' + wstring + '</p></div>';
+        '-letter words</div><p>' + wstring + '</p></div>';
           
     $(".container").append( worddiv );
 }
+
+
+function dict_link( w ) {
+    return '<a href="http://dictionary.reference.com/browse/' + w + 
+        '" target="_blank">'+ w + '</a>';
+}
+

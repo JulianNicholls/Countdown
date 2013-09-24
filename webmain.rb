@@ -6,13 +6,13 @@ require 'sass'
 require 'json'
 
 
+puts "Loading word list..."
 $list = CountdownWordList.new
 
 
 get( '/css/style.css' ) { scss :style } 
 
 get '/' do    # Show the form
-
   slim :index
 end
 
@@ -22,7 +22,9 @@ get '/words/:letters' do    # Return the words via AJAJ (JSON format)
   finish  = Time.now
   
   content_type :json
-  { :time  => sprintf( "%.3f", finish - start), 
+  
+  { 
+    :time  => sprintf( "%.3f", finish - start ), 
     :words => words
   }.to_json
 end
@@ -34,13 +36,14 @@ __END__
 $bkgr: #000050;
 $text: white;
 $fsize: 14pt;
-$bigsize: 24pt;
+$bigsize: 28pt;
 $hheight: 40px;
+$hsize: 18pt;
 
 body {
   background: $bkgr;
   color: $text;
-  font: $fsize arial, helvetica, sans-serif;
+  font: 14pt/21pt arial, helvetica, sans-serif;
 }
 
 img.center {
@@ -51,15 +54,20 @@ img.center {
 .container { width: 960px; margin: 0 auto }
 
 form { 
+  height: 100px;
+  background: url(/images/countdown.jpg) no-repeat;
+  display: block;
+  width: 940px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin: 20px auto;
+  padding: 245px 0 0 40px;
 }
 
 label {
-  display: inline-block;
   width: 140px;
   float: left;
   font-size: $bigsize;
+  margin-top: 12px;
 }
 
 input {
@@ -68,13 +76,21 @@ input {
   margin-right: 20px;
 }
 
+#letters {
+  text-transform: uppercase;
+  background: rgba( 100%, 100%, 100%, 0.7);
+}
+
 div.holder {
   margin-top: 20px;
   clear: both;
   border: 1px solid lighten( $bkgr, 30% );
   overflow: hidden;
   
-  p { padding: 10px; }
+  p { margin: 10px; }
+  
+  a       { text-decoration: none; color: $text; }
+  a:hover { color: #ffffa0; }
 }
 
 
@@ -84,6 +100,6 @@ div.header {
   background: lighten( $bkgr, 10% );
   height: $hheight;
   line-height: $hheight;
-  font-size: $bigsize;
+  font-size: $hsize;
   text-align: center;
 }
