@@ -72,7 +72,7 @@ class CountdownWord
   # resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
   
   def self.lettermap( word )
-    lmap = Hash.new { 0 }   # Empty map with automatic 0s
+    lmap = Hash.new( 0 )   # Empty map with automatic 0s
     
     word.each_char { |let| lmap[let] += 1 }         # Count 1 more
     

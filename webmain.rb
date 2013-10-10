@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require './countdownwordlist'
 require 'sinatra'
 require 'sinatra/reloader' if development?
@@ -33,7 +35,7 @@ end
 __END__
 
 @@style
-$bkgr: #000050;
+$bkgr: #071F39;
 $text: white;
 $fsize: 14pt;
 $bigsize: 28pt;
