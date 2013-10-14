@@ -72,7 +72,6 @@ class CountdownSession
       print yellow { bold { "\n\n#{length} Letters: " } }
       column = 11
       
-#      puts words.inject('') do
       words.each do |w|
         print cyan { bold { "#{w}, " } }
         column += length + 2
