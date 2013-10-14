@@ -4,104 +4,97 @@ require './countdownwordlist'
 
 include Term::ANSIColor
 
+class CountdownSession
 
-#----------------------------------------------------------------------------
-# Load the words from the word list file
+  #----------------------------------------------------------------------------
+  # Load the words from the word list file
 
-def load_wordlist
-  print yellow { bold { "Loading... " } }
+  def initialize
+    print yellow { bold { "Loading... " } }
 
-  list = CountdownWordList.new
+    @list = CountdownWordList.new
 
-  # Display the number of words for each initial letter, there's 143K in total.
+    # Display the number of words for each initial letter, there's 143K in total.
 
-  puts
-  list.debug
-  
-  list
-end
+    puts
+    @list.debug
+  end
 
 
-#----------------------------------------------------------------------------
-# Get the letters from the user
+  #----------------------------------------------------------------------------
+  # Get the letters from the user
 
-def get_letters
-  letters = ''
-  
-  while letters.length < 8
-    print cyan { bold { "\nLetters: " } }
-    letters = gets.strip.downcase
+  def get_letters
+    @letters = ''
+    
+    while @letters.length < 8
+      print cyan { bold { "\nLetters: " } }
+      @letters = gets.strip.downcase
+    end
+  end
+
+
+  #----------------------------------------------------------------------------
+  # Search for words in the list that can be built from the letters
+
+  def search
+    print red { bold { "\nSearching... " } }
+    
+    start     = Time.now
+    @wordlist = @list.words_from( @letters )
+    finish    = Time.now
+    
+    printf red { bold { "%.3fs, %d Words" } },  finish - start, @wordlist.length
   end
   
-  letters
-end
-
-
-#----------------------------------------------------------------------------
-# Search for words in the list that can be built from the letters
-
-def search( list, letters )
-  print red { bold { "\nSearching... " } }
   
-  start    = Time.now
-  wordlist = list.words_from( letters )
-  finish   = Time.now
+  #----------------------------------------------------------------------------
+  # Ask if the user wants to enter more letters
   
-  printf red { bold { "%.3fs, %d Words" } },  finish - start, wordlist.length
+  def go_again
+    yesno = 'q'
   
-  wordlist
-end
-
-
-#----------------------------------------------------------------------------
-# Show the list of buildable words.
-
-def show list
-  cur_len = 10
-  column  = 0
-  
-  list.each do |w|
-    w = w.to_s
+    until 'YN'.include? yesno
+      print yellow { bold { "\n\nAgain? " } }
+      yesno = gets[0].upcase
+    end
     
-    if w.length < cur_len   # Word length has changed, start a new sub-list
-      cur_len = w.length
-      print yellow { bold { "\n\n#{cur_len} Letters: " } }
+    yesno == 'Y'
+  end
+  
+  #----------------------------------------------------------------------------
+  # Show the list of buildable words.
+
+  def show
+    @wordlist.chunk { |w| w.to_s.length }.each do |arr|
+      length, words = arr
+      
+      print yellow { bold { "\n\n#{length} Letters: " } }
       column = 11
-    end
-    
-    print cyan { bold { "#{w}, " } }
-    column += cur_len + 2
-    if column > 77 - cur_len
-      puts
-      column = 0
+      
+#      puts words.inject('') do
+      words.each do |w|
+        print cyan { bold { "#{w}, " } }
+        column += length + 2
+        if column > 77 - length
+          puts
+          column = 0
+        end
+      end
     end
   end
-end
-
-#----------------------------------------------------------------------------
-# Ask if the user wants to enter more letters
-
-def go_again
-  yesno = 'q'
-  
-  until 'YN'.include? yesno
-    print yellow { bold { "\n\nAgain? " } }
-    yesno = gets[0].upcase
-  end
-  
-  yesno == 'Y'
 end
 
 #----------------------------------------------------------------------------
 # Start here
 
-list = load_wordlist
+session = CountdownSession.new
 
 again = true
 
 while again
-  letters  = get_letters              # Get the letters that have been chosen
-  thewords = search( list, letters )  # Search for what can be built from them
-  show thewords                       # List all the words, split by length
-  again = go_again                    # Ask the user if they want to go again
+  session.get_letters          # Get the letters that have been chosen
+  session.search               # Search for what can be built from them
+  session.show                 # List all the words, split by length
+  again = session.go_again     # Ask the user if they want to go again
 end
