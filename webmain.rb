@@ -12,7 +12,7 @@ puts "Loading word list..."
 $list = CountdownWordList.new
 
 
-get( '/css/style.css' ) { scss :style } 
+get( '/css/style.css' ) { scss :style }
 
 get '/' do    # Show the form
   slim :index
@@ -22,11 +22,11 @@ get '/words/:letters' do    # Return the words via AJAJ (JSON format)
   start   = Time.now
   words   = $list.words_from( params[:letters] );
   finish  = Time.now
-  
+
   content_type :json
-  
-  { 
-    :time  => sprintf( "%.3f", finish - start ), 
+
+  {
+    :time  => sprintf( "%.3f", finish - start ),
     :words => words
   }.to_json
 end
@@ -55,7 +55,7 @@ img.center {
 
 .container { width: 960px; margin: 0 auto }
 
-form { 
+form {
   height: 100px;
   background: url(/images/countdown.jpg) no-repeat;
   display: block;
@@ -88,9 +88,9 @@ div.holder {
   clear: both;
   border: 1px solid lighten( $bkgr, 30% );
   overflow: hidden;
-  
+
   p { margin: 10px; }
-  
+
   a       { text-decoration: none; color: $text; }
   a:hover { color: #ffffa0; }
 }
@@ -104,4 +104,8 @@ div.header {
   line-height: $hheight;
   font-size: $hsize;
   text-align: center;
+}
+
+div#header-9 {
+  background: #800;
 }
