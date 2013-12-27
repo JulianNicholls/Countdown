@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require './countdownwordlist'
 require 'sinatra'
 require 'sinatra/reloader' if development?
@@ -7,10 +5,8 @@ require 'slim'
 require 'sass'
 require 'json'
 
-
-puts "Loading word list..."
-$list = CountdownWordList.new
-
+puts 'Loading word list...'
+list = CountdownWordList.new
 
 get( '/css/style.css' ) { scss :style }
 
@@ -20,17 +16,16 @@ end
 
 get '/words/:letters' do    # Return the words via AJAJ (JSON format)
   start   = Time.now
-  words   = $list.words_from( params[:letters] );
+  words   = list.words_from( params[:letters] )
   finish  = Time.now
 
   content_type :json
 
   {
-    :time  => sprintf( "%.3f", finish - start ),
-    :words => words
+    time:  sprintf( '%.3f', finish - start ),
+    words: words
   }.to_json
 end
-
 
 __END__
 
