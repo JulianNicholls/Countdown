@@ -4,9 +4,9 @@
 class CountdownWord
   # Initialize with the word, defaults to lazy evaluation of the letter map.
 
-  def initialize( word, map_word = :dont_map )
+  def initialize( word, map_word = false )
     @word = word.downcase
-    @wmap = map_word == :map ? letter_map( word ) : nil
+    @wmap = map_word ? letter_map( word ) : nil
   end
 
   # Return whether the current word could be built from the letter map
@@ -32,7 +32,7 @@ class CountdownWord
       # If the letter list either doesn't have any of the current letter,
       # or not enough, then it can't be made from those letters.
 
-      return false if cand[let].nil? || cand[let] < @wmap[let]
+      return false unless cand.key?( let ) && cand[let] >= @wmap[let]
     end
 
     true  # To have fallen through here, it must be possible

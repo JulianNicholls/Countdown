@@ -31,7 +31,7 @@ class CountdownWordList
     # Find the unique letters, and also build the letter map for the letters.
 
     letters.downcase!
-    uniqs = letters.split(//).uniq
+    uniqs = letters.chars.uniq
     lmap  = CountdownWord.lettermap( letters )
 
     # Work through the unique letters, testing each word in the letter lists

@@ -25,11 +25,10 @@ class CountdownSession
   # Get the letters from the user
 
   def enter_letters
-    @letters = ''
-
-    while @letters.length < 8
+    loop do
       print cyan { bold { "\nLetters: " } }
       @letters = gets.strip.downcase
+      break if @letters.length >= 8
     end
   end
 
@@ -50,11 +49,12 @@ class CountdownSession
   # Ask if the user wants to enter more letters
 
   def go_again
-    yesno = 'q'
+    yesno = ''
 
-    until 'YN'.include? yesno
+    loop do
       print yellow { bold { "\n\nAgain? " } }
       yesno = gets[0].upcase
+      break if 'YN'.include? yesno
     end
 
     yesno == 'Y'

@@ -3,7 +3,6 @@
  */
 
 $(function() {
-
     $("form").submit( function() {
         $("div.holder").slideUp( 400 );
         $(".container").append( '<p class="wait">Searching...</p>' );
@@ -47,7 +46,7 @@ function field_words( data ) {
 
 
 function insert_div( wstring, len ) {
-    var len = worddiv = '<div class="holder"><div class="header" id="header-' + len + '">' + len +
+    var worddiv = '<div class="holder"><div class="header" id="header-' + len + '">' + len +
         '-letter words</div><p>' + wstring + '</p></div>';
 
     $(".container").append( worddiv );
