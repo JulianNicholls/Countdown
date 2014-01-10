@@ -1,0 +1,10 @@
+div.words
+  div.holder
+    div.header #{@words.size} words in #{@time} seconds
+
+  - @words.chunk { |w| w.to_s.length }.each do |arr|
+    - length, words = arr
+
+    div.holder
+      div.header id="header-#{length}" #{length}-letter words
+      p #{words.join( ', ' ).upcase }

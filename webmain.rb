@@ -19,12 +19,9 @@ get '/words/:letters' do    # Return the words via AJAJ (JSON format)
   words   = list.words_from( params[:letters] )
   finish  = Time.now
 
-  content_type :json
-
-  {
-    time:  sprintf( '%.3f', finish - start ),
-    words: words
-  }.to_json
+  @time = sprintf( '%.3f', finish - start )
+  @words = words
+  slim :words
 end
 
 __END__
@@ -91,7 +88,7 @@ div.holder {
 }
 
 
-div.holder:first_of_type { margin-top: 40px; }
+div.holder:first { margin-top: 40px; }
 
 div.header {
   background: lighten( $bkgr, 10% );
