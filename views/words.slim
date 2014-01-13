@@ -7,4 +7,8 @@ div.words
 
     div.holder
       div.header id="header-#{length}" #{length}-letter words
-      p #{words.join( ', ' ).upcase }
+      p
+        - words.each do |word|
+          a href="http://dictionary.reference.com/browse/#{word}" target="_blank"
+            = word.to_s.upcase
+          ' ,
