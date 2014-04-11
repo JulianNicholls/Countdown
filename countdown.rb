@@ -3,7 +3,6 @@ require 'term/ansicolor'
 require './countdownwordlist'
 
 # Run a text Countdown solving session
-
 class CountdownSession
   include Term::ANSIColor
 

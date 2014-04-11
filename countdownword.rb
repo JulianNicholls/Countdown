@@ -1,6 +1,5 @@
 # Hold a countdown candidate word, and its letter map which holds a count of
 # each character it contains
-
 class CountdownWord
   # Initialize with the word, defaults to lazy evaluation of the letter map.
 

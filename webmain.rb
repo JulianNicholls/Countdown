@@ -5,23 +5,25 @@ require 'slim'
 require 'sass'
 require 'json'
 
-puts 'Loading word list...'
-list = CountdownWordList.new
+# Countdown for the Web via Sinatra
+class CountdownApp < Sinatra::Application
+  puts 'Loading word list...'
+  @list = CountdownWordList.new
 
-get( '/css/style.css' ) { scss :style }
+  get( '/css/style.css' ) { scss :style }
 
-get '/' do    # Show the form
-  slim :index
-end
+  get '/' do    # Show the form
+    slim :index
+  end
 
-get '/words/:letters' do    # Return the words via AJAJ (JSON format)
-  start   = Time.now
-  words   = list.words_from( params[:letters] )
-  finish  = Time.now
+  get '/words/:letters' do    # Return the words as formatted HTML
+    start   = Time.now
+    @words  = @list.words_from( params[:letters] )
+    finish  = Time.now
 
-  @time = sprintf( '%.3f', finish - start )
-  @words = words
-  slim :words
+    @time  = format( '%.3f', finish - start )
+    slim :words
+  end
 end
 
 __END__
@@ -98,6 +100,4 @@ div.header {
   text-align: center;
 }
 
-div#header-9 {
-  background: #800;
-}
+div#header-9 { background: #800; }  /* Red header for 9 letter words */

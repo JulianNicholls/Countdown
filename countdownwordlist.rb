@@ -11,7 +11,6 @@ require './countdownword'
 # if the following letters were chosen: abcdfmpst
 # That's a pretty unlikely set to choose, but it does elicit 7 five letter
 # words.
-
 class CountdownWordList
   # Initialise the array from a word list file, defaulting to cwords.txt
   # using magic hash key array creation thing learnt from Ruby Koans
