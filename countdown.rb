@@ -1,5 +1,7 @@
 require 'term/ansicolor'
 
+#! /usr/bin/env ruby
+
 require './countdownwordlist'
 
 # Run a text Countdown solving session
@@ -25,7 +27,7 @@ class CountdownSession
 
   def enter_letters
     loop do
-      print cyan { bold { "\nLetters: " } }
+      print cyan { bold { "\n\nLetters: " } }
       @letters = gets.strip.downcase
       break if @letters.length >= 8
     end
@@ -45,24 +47,11 @@ class CountdownSession
   end
 
   #----------------------------------------------------------------------------
-  # Ask if the user wants to enter more letters
-
-  def go_again
-    yesno = ''
-
-    loop do
-      print yellow { bold { "\n\nAgain? " } }
-      yesno = gets[0].upcase
-      break if 'YN'.include? yesno
-    end
-
-    yesno == 'Y'
-  end
-
-  #----------------------------------------------------------------------------
   # Show the list of buildable words.
 
   def show
+    system( 'clear' )
+    
     @wordlist.chunk { |w| w.to_s.length }.each do |arr|
       length, words = arr
 
@@ -79,7 +68,7 @@ class CountdownSession
     words.each do |w|
       print cyan { bold { "#{w}, " } }
       column += length + 2
-      if column > 77 - length
+      if column > 78 - length
         puts
         column = 0
       end
@@ -96,5 +85,4 @@ loop do
   session.enter_letters         # Get the letters that have been chosen
   session.search                # Search for what can be built from them
   session.show                  # List all the words, split by length
-  break unless session.go_again # Ask the user if they want to go again
 end
