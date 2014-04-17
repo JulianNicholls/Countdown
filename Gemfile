@@ -6,3 +6,4 @@ gem 'json'
 gem 'sass'
 gem 'slim'
 
+gem 'term-ansicolor'
