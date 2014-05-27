@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+
 require 'term/ansicolor'
 
 #! /usr/bin/env ruby
@@ -27,7 +29,7 @@ class CountdownSession
 
   def enter_letters
     loop do
-      print cyan { bold { "\n\nLetters: " } }
+      print cyan, bold, "\n\nLetters: ", white
       @letters = gets.strip.downcase
       break if @letters.length >= 8
     end
@@ -37,7 +39,9 @@ class CountdownSession
   # Search for words in the list that can be built from the letters
 
   def search
-    print red { bold { "\nSearching... " } }
+    system( 'clear' )
+    
+    print red { bold { "\n#{@letters.upcase} - Searching... " } }
 
     start     = Time.now
     @wordlist = @list.words_from( @letters )
@@ -50,8 +54,6 @@ class CountdownSession
   # Show the list of buildable words.
 
   def show
-    system( 'clear' )
-    
     @wordlist.chunk { |w| w.to_s.length }.each do |arr|
       length, words = arr
 
