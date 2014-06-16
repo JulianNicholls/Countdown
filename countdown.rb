@@ -1,10 +1,8 @@
-#! /usr/bin/env ruby
+#! /usr/bin/env ruby -I.
 
 require 'term/ansicolor'
 
-#! /usr/bin/env ruby
-
-require './countdownwordlist'
+require 'countdownwordlist'
 
 # Run a text Countdown solving session
 class CountdownSession
@@ -29,7 +27,7 @@ class CountdownSession
 
   def enter_letters
     loop do
-      print cyan, bold, "\n\nLetters: ", white
+      print bright_cyan, "\n\nLetters: ", white
       @letters = gets.strip.downcase
       break if @letters.length >= 8
     end
