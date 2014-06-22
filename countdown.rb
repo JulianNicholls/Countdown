@@ -66,7 +66,7 @@ class CountdownSession
     length  = words.first.to_s.size
 
     words.each do |w|
-      print cyan { bold { "#{w}, " } }
+      print bright_cyan, "#{w}, "
       column += length + 2
       if column > 78 - length
         puts
