@@ -41,6 +41,8 @@ There is now a very simple web version using [Sinatra](http://sinatrarb.com),
 [Slim](http://slim-lang.com/), and [SASS](http://sass-lang.com/). The words
 are returned via AJAX using [jQuery](http://jquery.com) in JSON format.
 
+It is available online [here](http://immense-mesa-6092.herokuapp.com/).
+
 ### Operator <=> overloading
 
 The definition for the <=> operator in built-in classes explicitly states that 
