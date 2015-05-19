@@ -50,14 +50,9 @@ class CountdownWord
     other = other.to_s
     comp  = other.length - @word.length
 
-    if comp == 0        # Same length, sort alphabetically
-      return -1 if @word < other
-      return 1  if @word > other
-    end
+    return comp unless comp == 0   # Return which is longer
 
-    # One or other is longer, so return that
-
-    comp
+    @word < other ? -1 : 1          # Same length, sort alphabetically
   end
 
   # This is the key to the whole thing. It returns a map of the used letters, thus:
