@@ -5,6 +5,7 @@ require 'sass'
 require 'json'
 
 require './countdownwordlist'
+require './format'
 
 # Countdown for the Web via Sinatra
 class CountdownApp < Sinatra::Application
@@ -14,11 +15,11 @@ class CountdownApp < Sinatra::Application
   class << self
     attr_reader :list
   end
-  
+
   def list
     self.class.list
   end
-  
+
   get( '/css/style.css' ) { scss :style }
 
   get '/' do    # Show the form
@@ -30,7 +31,7 @@ class CountdownApp < Sinatra::Application
     @words  = list.words_from( params[:letters] )
     finish  = Time.now
 
-    @time  = format( '%.3f', finish - start )
+    @time  = time_format( finish - start )
     slim :words
   end
 end
@@ -89,7 +90,7 @@ input {
 div.holder {
   margin-top: 20px;
   clear: both;
-  border: 1px solid lighten( $bkgr, 30% );
+  border: 1px solid lighten( $bkgr, 40% );
   overflow: hidden;
 
   p { margin: 10px; }

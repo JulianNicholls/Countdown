@@ -3,6 +3,7 @@
 require 'term/ansicolor'
 
 require 'countdownwordlist'
+require 'format'
 
 # Run a text Countdown solving session
 class CountdownSession
@@ -38,14 +39,14 @@ class CountdownSession
 
   def search
     system( 'clear' )
-    
+
     print red { bold { "\n#{@letters.upcase} - Searching... " } }
 
     start     = Time.now
     @wordlist = @list.words_from( @letters )
     finish    = Time.now
 
-    printf red { bold { '%.3fs, %d Words' } },  finish - start, @wordlist.length
+    printf red { bold { "#{time_format(finish - start)}, #{@wordlist.length} Words" } }
   end
 
   #----------------------------------------------------------------------------

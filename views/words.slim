@@ -1,6 +1,6 @@
 div.words
   div.holder
-    div.header #{@words.size} words in #{@time} seconds
+    div.header #{@words.size} words in #{@time}
 
   - @words.chunk { |w| w.to_s.length }.each do |arr|
     - length, words = arr
