@@ -5,7 +5,7 @@ class CountdownWord
 
   def initialize( word, map_word = false )
     @word = word.downcase
-    @wmap = map_word ? letter_map( word ) : nil
+    @wmap = map_word ? CountdownWord.lettermap( word ) : nil
   end
 
   # Return whether the current word could be built from the letter map
