@@ -1,12 +1,12 @@
 div.words
   div.holder
-    div.header #{@words.size} words
+    div.header <span>#{@words.size}</span> words
 
   - @words.chunk { |w| w.to_s.length }.each do |arr|
     - length, words = arr
 
     div.holder
-      div.header id="header-#{length}" #{length}-letter words
+      div.header id="header-#{length}" <span>#{length}</span>-letter words
       p
         - words.each do |word|
           a href="http://dictionary.reference.com/browse/#{word}" target="_blank"

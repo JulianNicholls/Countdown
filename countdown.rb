@@ -17,7 +17,7 @@ class CountdownSession
 
     @list = CountdownWordList.new
 
-    # Display the number of words for each initial letter, there's 143K in total.
+    # Display the number of words for each initial letter, 143K in total.
 
     puts
     @list.debug
@@ -38,15 +38,17 @@ class CountdownSession
   # Search for words in the list that can be built from the letters
 
   def search
-    system( 'clear' )
+    system('clear')
 
     print red { bold { "\n#{@letters.upcase} - Searching... " } }
 
     start     = Time.now
-    @wordlist = @list.words_from( @letters )
+    @wordlist = @list.words_from(@letters)
     finish    = Time.now
 
-    printf red { bold { "#{time_format(finish - start)}, #{@wordlist.length} Words" } }
+    printf red {
+      bold { "#{time_format(finish - start)}, #{@wordlist.length} Words" }
+    }
   end
 
   #----------------------------------------------------------------------------
@@ -58,11 +60,11 @@ class CountdownSession
 
       print yellow { bold { "\n\n#{length} Letters: " } }
 
-      list( words )
+      list(words)
     end
   end
 
-  def list( words )
+  def list(words)
     column  = 11
     length  = words.first.to_s.size
 

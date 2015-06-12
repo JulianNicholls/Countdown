@@ -9,35 +9,35 @@ require './countdownword'
 #
 # The maximum number of words to search is 87K of the 143K words (61%).
 # if the following letters were chosen: abcdfmpst
-# That's a pretty unlikely set to choose, but it does elicit 7 five letter
-# words.
+# That's a pretty unlikely (not to say against the rules of Countdown) set
+# to choose, but it does elicit 7 five letter words.
 class CountdownWordList
   # Initialise the array from a word list file, defaulting to cwords.txt
   # using magic hash key array creation thing learnt from Ruby Koans
 
-  def initialize( filename = nil )
+  def initialize(filename = nil)
     fn     = filename || 'cwords.txt'
     @words = Hash.new { |hash, key| hash[key] = [] }
 
-    File.foreach( fn ) do |line|
-      @words[line[0]] << CountdownWord.new( line.chomp )
+    File.foreach(fn) do |line|
+      @words[line[0]] << CountdownWord.new(line.chomp)
     end
   end
 
   # Get the list of words that can be built from the passed letters
 
-  def words_from( letters )
+  def words_from(letters)
     # Find the unique letters, and also build the letter map for the letters.
 
     letters.downcase!
     uniqs = letters.chars.uniq
-    lmap  = CountdownWord.lettermap( letters )
+    lmap  = CountdownWord.lettermap(letters)
 
     # Work through the unique letters, testing each word in the letter lists
     # against the passed letters
 
     list = uniqs.map do |let|
-      @words[let].select { |word| word.can_be_made_from( lmap ) }
+      @words[let].select { |word| word.can_be_made_from(lmap) }
     end
 
     # Flatten out the array of arrays resulting from map, and sort by length,

@@ -3,9 +3,9 @@
 class CountdownWord
   # Initialize with the word, defaults to lazy evaluation of the letter map.
 
-  def initialize( word, map_word = false )
+  def initialize(word, map_word = false)
     @word = word.downcase
-    @wmap = map_word ? CountdownWord.lettermap( word ) : nil
+    @wmap = map_word ? CountdownWord.lettermap(word) : nil
   end
 
   # Return whether the current word could be built from the letter map
@@ -13,17 +13,17 @@ class CountdownWord
   #
   # belabour could be built from 'belbaoura' because
   #
-  #   { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1} (map for belabour) matches with
+  #   { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1} (map for belabour) matches
   #   { b: 2, e: 1, l: 1, a: 2, o: 1, u: 1, r: 1} (map for 'belbaoura')
   #
   # in that the number of every character in the word appears in the candidate
   # lettermap.
 
-  def can_be_made_from( cand )
+  def can_be_made_from(candidate)
     # If the current word hasn't been lettermap'ed yet, then do it now and
     # store it for next time.
 
-    @wmap ||= CountdownWord.lettermap( @word )
+    @wmap ||= CountdownWord.lettermap(@word)
 
     # Work through the word, checking if the candidate letters could build it.
 
@@ -31,7 +31,7 @@ class CountdownWord
       # If the letter list either doesn't have any of the current letter,
       # or not enough, then it can't be made from those letters.
 
-      return false unless cand.key?( let ) && cand[let] >= @wmap[let]
+      return false unless candidate.key?(let) && candidate[let] >= @wmap[let]
     end
 
     true  # To have fallen through here, it must be possible
@@ -46,7 +46,7 @@ class CountdownWord
   # Perform a comparison, by decreasing length, then alphabetically.
   # See readme.md for an interesting aside about operator <=>
 
-  def <=>( other )
+  def <=>(other)
     other = other.to_s
     comp  = other.length - @word.length
 
@@ -55,13 +55,14 @@ class CountdownWord
     @word < other ? -1 : 1          # Same length, sort alphabetically
   end
 
-  # This is the key to the whole thing. It returns a map of the used letters, thus:
-  # Word      Map
-  # belabour  { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1 }
-  # resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
+  # This is the key to the whole thing. It returns a map of the used letters,
+  # thus:
+  #   Word      Map
+  #   belabour  { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1 }
+  #   resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
 
-  def self.lettermap( word )
-    lmap = Hash.new( 0 )   # Empty map with automatic 0s
+  def self.lettermap(word)
+    lmap = Hash.new(0)   # Empty map with automatic 0s
 
     word.each_char { |let| lmap[let] += 1 }         # Count 1 more
 
