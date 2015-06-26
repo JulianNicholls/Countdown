@@ -97,7 +97,7 @@ div.holder {
         text-decoration: none;
         color: $text;
 
-        a:hover { color: #ffffa0; }
+        &:hover { color: #ffffa0; }
     }
 }
 
