@@ -4,11 +4,59 @@ html lang='en'
     meta charset="utf-8"
     meta name="viewport" content="width=960"
     title Countdown Magician
+    link href="css/bootstrap.min.css" rel="stylesheet"
     link href="/css/style.css" rel="stylesheet"
 
   body
+    nav.navbar.navbar-default.navbar-fixed-top
+      div.container
+        div.navbar-header
+          button.navbar-toggle.collapsed type="button" data-toggle="collapse" data-target="#navbar"
+            span.sr-only Toggle navigation
+          a.navbar-brand href="http://reallybigshoe.co.uk"
+            img src="RBSLogo2_small.png" alt="RBS Logo"
+
+        div#navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a href="http://reallybigshoe.co.uk" Home
+            li.active
+              a href="http://immense-countdown.herokuapp.com" Countdown
+            li
+              a href="http://ha-roadworks.herokuapp.com" Roadworks
+            li
+              a href="https://twitter.com/ReallyBigShoeUK" target="_blank" Twitter
+            li
+              a href="https://github.com/JulianNicholls" target="_blank" GitHub
+
     div.container
       == yield
 
+    footer
+      div.row
+        div.col-md-1
+          img src="RBSLogo2_small.png" alt="RBS Small Logo"
+        div.col-md-4
+          nav
+            ul
+              li
+                a href="http://reallybigshoe.co.uk" Home
+              li
+                a href="https://twitter.com/ReallyBigShoeUK" target="_blank" Twitter
+              li
+                a href="https://github.com/JulianNicholls" target="_blank" Github
+
+      div.container
+        div.row
+          div.col-md-6.col-md-offset-4
+            p
+              small
+                ' Created on a Mac with
+                a href="http://www.sublimetext.com" target="_blank" Sublime Text
+                '  and
+                a href="https://www.ruby-lang.org" target="_blank" Ruby
+
+
     script src="http://code.jquery.com/jquery.js"
-    script src="/js/magician.js"
+    script src="js/bootstrap.min.js"
+    script src="js/magician.js"

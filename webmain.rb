@@ -45,7 +45,11 @@ $hsize: 18pt;
 body {
     background: $bkgr;
     color: $text;
-    font: 14pt/21pt arial, helvetica, sans-serif;
+    padding-top: 70px
+}
+
+nav img {
+    margin-top: -7px;
 }
 
 img.center {
@@ -53,28 +57,18 @@ img.center {
     margin: 20px auto;
 }
 
-.container { width: 960px; margin: 0 auto }
-
 form {
-    height: 100px;
+    height: 300px;
     background: url(/images/countdown.jpg) no-repeat;
-    display: block;
-    width: 940px;
-    overflow: hidden;
-    margin: 20px auto;
     padding: 245px 0 0 40px;
 }
 
+
 label {
-    width: 140px;
-    float: left;
-    font-size: $bigsize;
-    margin-top: 12px;
+    width: 100px;
 }
 
 input {
-    font-size: $bigsize;
-    float: left;
     margin-right: 20px;
 }
 
@@ -113,4 +107,26 @@ div.header {
     }
 }
 
-div#header-9 { background: #800; }  /* Red header for 9 letter words */
+div#header-9 { background: #800; }  // Red header for 9 letter words
+
+footer {
+    margin-top: 20px;
+    padding: 10px 0 0 10px;
+    border-top: 2px solid #aaa;
+    background-color: #ddd;
+    color: black;
+
+    nav ul {
+        list-style-type: none;
+
+        li {
+            float: left;
+            margin-right: 20px;
+        }
+    }
+
+    small {
+        font-size: 80%
+    }
+}
+
