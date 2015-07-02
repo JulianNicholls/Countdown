@@ -8,7 +8,7 @@ $(function() {
 
         $("div.holder").slideUp( 400 );
 
-        $(".words").load( '/words/' + $("#letters").val() + ' .words .holder' );
+        $(".words").load( '/words/' + $("#letters").val() + ' .word-holder' );
 
         return false;
     });

@@ -1,14 +1,21 @@
-div.words
+div.word-holder
   div.holder
     div.header <span>#{@words.size}</span> words
 
-  - @words.chunk { |w| w.to_s.length }.each do |arr|
-    - length, words = arr
+  - row_open = false
+  - @words.chunk { |w| w.to_s.length }.each do |length, words|
 
-    div.holder
-      div.header id="header-#{length}" <span>#{length}</span>-letter words
-      p
-        - words.each do |word|
-          a href="http://dictionary.reference.com/browse/#{word}" target="_blank"
-            = word.to_s.upcase
-          ' ,
+    - if row_open
+      - row_open = false
+    - else
+      - row_open = true
+      div.row
+
+    div.col-md-6.col-xs-12
+      div.holder
+        div.header id="header-#{length}" <span>#{length}</span>-letter words
+        p
+          - words.each do |word|
+            a href="http://dictionary.reference.com/browse/#{word}" target="_blank"
+              = word.to_s.upcase
+            ' ,

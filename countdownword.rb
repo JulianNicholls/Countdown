@@ -50,7 +50,7 @@ class CountdownWord
     other = other.to_s
     comp  = other.length - @word.length
 
-    return comp unless comp == 0   # Return which is longer
+    return comp unless comp == 0    # Return which is longer
 
     @word < other ? -1 : 1          # Same length, sort alphabetically
   end

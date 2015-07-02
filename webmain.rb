@@ -79,11 +79,7 @@ input {
 
 div.holder {
     margin-top: 20px;
-    clear: both;
     border: 1px solid lighten( $bkgr, 40% );
-    overflow: hidden;
-
-    &:first { margin-top: 40px; }
 
     p { margin: 10px; }
 
