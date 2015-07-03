@@ -28,6 +28,6 @@ class CountdownApp < Sinatra::Application
   get '/words/:letters' do    # Return the words as formatted HTML
     @words  = list.words_from(params[:letters])
 
-    slim :words
+    erb :words
   end
 end
