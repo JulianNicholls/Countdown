@@ -1,0 +1,48 @@
+<div class="word-holder">
+  <div class="holder">
+    <div class="header">
+      <span><%= @words.size %> words</span>
+    </div>
+  </div>
+
+  <% state = :closed %>
+  <% @words.chunk { |w| w.to_s.length }.each do |length, words| %>
+    <% if state == :closed %>
+      <div class="row">
+      <% state = :first %>
+    <% end %>
+
+    <% if words.size > 18
+      if state != :first %>
+        </div>
+        <div class="row">
+      <% end
+      state = :second %>
+      <div class="col-md-12">
+    <% else %>
+      <div class="col-md-6">
+    <% end %>
+      <div class="holder">
+        <div class="header" id="header-<%= length %>">
+          <span><%= length %></span>-letter words (<%= words.size %>)
+        </div>
+        <p>
+          <% words.each do |word| %>
+            <a href="http://dictionary.reference.com/browse/<%= word.to_s %>" target="_blank"><%= word.to_s.upcase %></a>,
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <% case state
+       when :first then state = :second
+       when :second then begin %>
+        </div>
+        <% state = :closed
+       end
+    end
+  end
+
+  if state != :closed %>
+    </div>
+  <% end %>
+</div>
