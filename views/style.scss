@@ -27,26 +27,14 @@ form {
 }
 
 
-label {
-    width: 4em;
-    font-size: $bigsize;
-}
-
 input {
     margin-right: 20px;
 }
 
 input#letters {
-    margin-top: -15px;
-    font-size: $bigsize;
-    height: 60px;
-    padding: 0 0 0 10px;
+    width: 9em;
     text-transform: uppercase;
     background: rgba( 100%, 100%, 100%, 0.7);
-}
-
-button.cd {
-    font-size: $bigsize;
 }
 
 div.holder {
@@ -98,3 +86,21 @@ footer {
     }
 }
 
+@media (min-width: 960px) {
+    label {
+        width: 4em;
+        font-size: $bigsize;
+    }
+    
+    input#letters {
+        margin-top: -15px;
+        font-size: $bigsize;
+        height: 60px;
+        padding: 0 0 0 10px;
+    }
+
+    button.cd {
+        font-size: $bigsize;
+    }
+
+}
