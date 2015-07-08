@@ -5,9 +5,9 @@
     </div>
   </div>
 
-  <% state = :closed %>
-  <% @words.chunk { |w| w.to_s.length }.each do |length, words| %>
-    <% if state == :closed %>
+  <% state = :closed
+  @words.chunk { |w| w.to_s.length }.each do |length, words|
+    if state == :closed %>
       <div class="row">
       <% state = :first %>
     <% end %>
@@ -18,9 +18,9 @@
         <div class="row">
       <% end
       state = :second %>
-      <div class="col-md-12">
+      <div class="col-sm-12">
     <% else %>
-      <div class="col-md-6">
+      <div class="col-sm-6">
     <% end %>
       <div class="holder">
         <div class="header" id="header-<%= length %>">
@@ -39,8 +39,8 @@
         </div>
         <% state = :closed
        end
-    end
-  end
+    end     # case
+  end     # words chunk each
 
   if state != :closed %>
     </div>
