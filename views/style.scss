@@ -1,7 +1,7 @@
 $bkgr: #071F39;
 $text: white;
 $fsize: 14pt;
-$bigsize: 28pt;
+$bigsize: 26pt;
 $hheight: 40px;
 $hsize: 18pt;
 
@@ -26,6 +26,9 @@ form {
     padding: 245px 0 0 40px;
 }
 
+label {
+    width: 4em;
+}
 
 input {
     margin-right: 20px;
@@ -86,9 +89,8 @@ footer {
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 960px) {
     label {
-        width: 4em;
         font-size: $bigsize;
     }
     
