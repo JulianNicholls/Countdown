@@ -9,18 +9,20 @@ require './countdownword'
 #
 # The maximum number of words to search is 87K of the 143K words (61%).
 # if the following letters were chosen: abcdfmpst
-# That's a pretty unlikely (not to say against the rules of Countdown) set
-# to choose, but it does elicit 7 five letter words.
+# That's a pretty unlikely (not to mention against the rules of Countdown)
+# set to choose, but it does elicit 7 five letter words.
 class CountdownWordList
   # Initialise the array from a word list file, defaulting to cwords.txt
   # using magic hash key array creation thing learnt from Ruby Koans
 
   def initialize(filename = nil)
-    fn     = filename || 'cwords.txt'
     @words = Hash.new { |hash, key| hash[key] = [] }
+    load filename
+  end
 
-    File.foreach(fn) do |line|
-      @words[line[0]] << CountdownWord.new(line.chomp)
+  def load(filename)
+    File.foreach(filename) do |line|
+      @words[line[0]] << InitializedCountdownWord.new(line.chomp)
     end
   end
 

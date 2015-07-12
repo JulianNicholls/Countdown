@@ -1,11 +1,24 @@
 # Hold a countdown candidate word, and its letter map which holds a count of
 # each character it contains
 class CountdownWord
-  # Initialize with the word, defaults to lazy evaluation of the letter map.
+  # This is the key to the whole thing. It returns a map of the used letters,
+  # thus:
+  #   Word      Map
+  #   belabour  { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1 }
+  #   resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
 
-  def initialize(word, map_word = false)
+  def self.lettermap(word)
+    lmap = Hash.new(0)   # Empty map with automatic 0s
+
+    word.each_char { |let| lmap[let] += 1 }         # Count 1 more
+
+    lmap         # Return map
+  end
+
+  # Initialize with the word, with no evaluation of the letter map.
+
+  def initialize(word)
     @word = word.downcase
-    @wmap = map_word ? CountdownWord.lettermap(word) : nil
   end
 
   # Return whether the current word could be built from the letter map
@@ -54,18 +67,12 @@ class CountdownWord
 
     @word < other ? -1 : 1          # Same length, sort alphabetically
   end
+end
 
-  # This is the key to the whole thing. It returns a map of the used letters,
-  # thus:
-  #   Word      Map
-  #   belabour  { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1 }
-  #   resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
-
-  def self.lettermap(word)
-    lmap = Hash.new(0)   # Empty map with automatic 0s
-
-    word.each_char { |let| lmap[let] += 1 }         # Count 1 more
-
-    lmap         # Return map
+# Word holder which initializes te letter map on creation.
+class InitializedCountdownWord < CountdownWord
+  def initialize(word)
+    super
+    @wmap = CountdownWord.lettermap(word)
   end
 end

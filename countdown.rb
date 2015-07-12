@@ -13,9 +13,9 @@ class CountdownSession
   # Load the words from the word list file
 
   def initialize
-    print yellow { bold { 'Loading... ' } }
+    print yellow, bold { 'Loading... ' }
 
-    @list = CountdownWordList.new
+    @list = CountdownWordList.new 'cwords.txt'
 
     # Display the number of words for each initial letter, 143K in total.
 
@@ -40,25 +40,19 @@ class CountdownSession
   def search
     system('clear')
 
-    print red { bold { "\n#{@letters.upcase} - Searching... " } }
+    print red, bold, "\n#{@letters.upcase} - Searching... "
 
-    start     = Time.now
     @wordlist = @list.words_from(@letters)
-    finish    = Time.now
 
-    printf red {
-      bold { "#{time_format(finish - start)}, #{@wordlist.length} Words" }
-    }
+    printf "#{@wordlist.length} Words", reset
   end
 
   #----------------------------------------------------------------------------
   # Show the list of buildable words.
 
   def show
-    @wordlist.chunk { |w| w.to_s.length }.each do |arr|
-      length, words = arr
-
-      print yellow { bold { "\n\n#{length} Letters: " } }
+    @wordlist.chunk { |word| word.to_s.length }.each do |length, words|
+      print yellow, bold, "\n\n#{length} Letters: ", reset
 
       list(words)
     end
@@ -68,8 +62,8 @@ class CountdownSession
     column  = 11
     length  = words.first.to_s.size
 
-    words.each do |w|
-      print bright_cyan, "#{w}, "
+    words.each do |word|
+      print bright_cyan, "#{word}, "
       column += length + 2
       if column > 78 - length
         puts
