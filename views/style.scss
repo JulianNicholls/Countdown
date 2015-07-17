@@ -8,7 +8,6 @@ $hsize: 18pt;
 body {
     background: $bkgr;
     color: $text;
-    padding-top: 70px
 }
 
 nav img {
@@ -93,7 +92,7 @@ footer {
     label {
         font-size: $bigsize;
     }
-    
+
     input#letters {
         margin-top: -12px;
         font-size: $bigsize;
