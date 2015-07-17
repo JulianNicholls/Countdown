@@ -5,8 +5,8 @@ This is a word finder for the UK (originally French) TV gameshow
 
 ## Word list
 
-It uses a word list constructed from
-Kevin Atkinson's [wordlist page](http://wordlist.sourceforge.net/). 
+It uses a word list constructed from Kevin Atkinson's
+[wordlist page](http://wordlist.sourceforge.net/). 
 I have included the whole copyright file that comes with the download, since
 all the component word lists have ultimately been placed in the public domain, 
 but there are a number of different statements of copyright contained. Clearly,
@@ -26,8 +26,7 @@ been found by this program as one of the longest words.
 
 ## Bonuses
 
-It only occurred to me while I was watching my first Countdown after I 
-developed this, that it works just as well for:
+It works just as well for:
 
 - The teatime teasers at the end of each segment.
 - The final conundrum round.
