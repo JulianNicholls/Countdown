@@ -6,9 +6,8 @@ $(function() {
     $("form").submit( function() {
         $(".words").prepend( '<p class="wait">Searching...</p>' );
 
-        $("div.holder").fadeOut( 300, function() {
-            $(".words").load( '/words/' + $("#letters").val() + ' .word-holder' );
-        });
+        $("div.holder").fadeOut(300);
+        $(".words").load('/words/' + $("#letters").val() + ' .word-holder');
 
         return false;
     });
