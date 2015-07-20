@@ -1,6 +1,7 @@
 $bkgr: #071F39;
 $text: white;
 $fsize: 14pt;
+$medsize: 20pt;
 $bigsize: 25pt;
 $hheight: 40px;
 $hsize: 18pt;
@@ -88,6 +89,28 @@ footer {
     }
 }
 
+@media (max-width: 994px) {
+    li.active {
+        display: none;
+    }
+}
+@media (min-width: 790px) and (max-width: 959px) {
+    label {
+        font-size: $medsize;
+    }
+
+    input#letters {
+        margin-top: -12px;
+        font-size: $medsize;
+        height: 50px;
+        padding: 0 0 0 10px;
+    }
+
+    button.cd {
+        font-size: $medsize;
+    }
+}
+
 @media (min-width: 960px) {
     label {
         font-size: $bigsize;
@@ -103,5 +126,4 @@ footer {
     button.cd {
         font-size: $bigsize;
     }
-
 }
