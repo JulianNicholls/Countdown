@@ -42,6 +42,11 @@ are returned via AJAX using [jQuery](http://jquery.com) in JSON format.
 
 It is available online [here](http://immense-countdown.herokuapp.com/).
 
+## Responsive Display
+
+The web version is now much more responsive to screen sizes, down to a mobile
+screen in portrait orientation.
+
 ### Operator <=> overloading
 
 The definition for the <=> operator in built-in classes explicitly states that 
