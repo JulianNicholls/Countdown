@@ -21,9 +21,7 @@ class CountdownWordList
   end
 
   def load(filename)
-    File.foreach(filename) do |line|
-      @words[line[0]] << InitializedCountdownWord.new(line.chomp)
-    end
+    File.foreach(filename) { |line| add line.chomp }
   end
 
   # Get the list of words that can be built from the passed letters
@@ -31,16 +29,12 @@ class CountdownWordList
   def words_from(letters)
     # Find the unique letters, and also build the letter map for the letters.
 
-    letters.downcase!
-    uniqs = letters.chars.uniq
-    lmap  = CountdownWord.lettermap(letters)
+    @candidate_word = InitializedCountdownWord.new letters
 
     # Work through the unique letters, testing each word in the letter lists
     # against the passed letters
 
-    list = uniqs.map do |let|
-      @words[let].select { |word| word.can_be_made_from(lmap) }
-    end
+    list = @candidate_word.uniques.map { |let| search let }
 
     # Flatten out the array of arrays resulting from map, and sort by length,
     # longest first
@@ -52,5 +46,15 @@ class CountdownWordList
 
   def debug
     @words.each_key { |ltr| printf "%c: %5d\n", ltr.upcase, @words[ltr].length }
+  end
+
+  private
+
+  def add(word)
+      @words[word[0]] << InitializedCountdownWord.new(word)
+  end
+
+  def search(letter)
+      @words[letter].select { |word| word.can_be_made_from(@candidate_word) }
   end
 end
