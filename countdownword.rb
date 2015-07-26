@@ -7,6 +7,8 @@ class CountdownWord
   #   belabour  { b: 2, e: 1, l: 1, a: 1, o: 1, u: 1, r: 1 }
   #   resonate  { r: 1, e: 2, s: 1, o: 1, n: 1, a: 1, t: 1 }
 
+  attr_reader :wmap
+
   def self.lettermap(word)
     lmap = Hash.new(0)   # Empty map with automatic 0s
 
@@ -33,6 +35,8 @@ class CountdownWord
   # lettermap.
 
   def can_be_made_from(candidate)
+    candidate = candidate.wmap if candidate.respond_to? :wmap
+
     # If the current word hasn't been lettermap'ed yet, then do it now and
     # store it for next time.
 
@@ -66,6 +70,10 @@ class CountdownWord
     return comp unless comp == 0    # Return which is longer
 
     @word < other ? -1 : 1          # Same length, sort alphabetically
+  end
+
+  def uniques
+    @wmap.keys
   end
 end
 
