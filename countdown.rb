@@ -3,7 +3,6 @@
 require 'term/ansicolor'
 
 require 'countdownwordlist'
-require 'format'
 
 # Run a text Countdown solving session
 class CountdownSession
@@ -59,17 +58,37 @@ class CountdownSession
   end
 
   def list(words)
-    column  = 11
-    length  = words.first.to_s.size
+    output = WrappingOutput.new(80, 11)
 
-    words.each do |word|
-      print bright_cyan, "#{word}, "
-      column += length + 2
-      if column > 78 - length
-        puts
-        column = 0
-      end
+    words.each { |word| output.print bright_cyan, "#{word}, " }
+  end
+end
+
+# Handle output of a word, keeping track of the output column
+class WrappingOutput
+  def initialize(line_length = 80, column = 0)
+    @line_length = line_length
+    @column = column
+  end
+
+  def print(*args)
+    @output = *args
+    Kernel.print *args
+    update_column
+  end
+
+  private
+
+  def update_column
+    @column += output_length
+    if @column > 79 - output_length
+      puts
+      @column = 0
     end
+  end
+
+  def output_length
+    @output.each.reduce(0) { |acc, item| acc + ((/\A\e\[.*m\z/ =~ item) ? 0 : item.length) }
   end
 end
 
