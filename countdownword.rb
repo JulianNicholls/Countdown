@@ -81,6 +81,6 @@ end
 class InitializedCountdownWord < CountdownWord
   def initialize(word)
     super
-    @wmap = CountdownWord.lettermap(word)
+    @wmap = CountdownWord.lettermap(@word)
   end
 end
