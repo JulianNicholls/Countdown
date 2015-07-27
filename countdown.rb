@@ -73,7 +73,7 @@ class WrappingOutput
 
   def print(*args)
     @output = *args
-    Kernel.print *args
+    Kernel.print(*args)
     update_column
   end
 
@@ -81,14 +81,17 @@ class WrappingOutput
 
   def update_column
     @column += output_length
-    if @column > 79 - output_length
-      puts
-      @column = 0
-    end
+
+    return if @column <= 79 - output_length
+
+    puts
+    @column = 0
   end
 
   def output_length
-    @output.each.reduce(0) { |acc, item| acc + ((/\A\e\[.*m\z/ =~ item) ? 0 : item.length) }
+    @output.each.reduce(0) do |acc, item|
+      acc + ((/\A\e\[.*m\z/ =~ item) ? 0 : item.length)
+    end
   end
 end
 

@@ -51,10 +51,10 @@ class CountdownWordList
   private
 
   def add(word)
-      @words[word[0]] << InitializedCountdownWord.new(word)
+    @words[word[0]] << InitializedCountdownWord.new(word)
   end
 
   def search(letter)
-      @words[letter].select { |word| word.can_be_made_from(@candidate_word) }
+    @words[letter].select { |word| word.can_be_made_from(@candidate_word) }
   end
 end
