@@ -3,8 +3,8 @@
  */
 
 $(function() {
-    $("form").submit( function() {
-        $(".words").prepend( '<p class="wait">Searching...</p>' );
+    $("form").submit(function(e) {
+        $(".words").prepend('<p class="wait">Searching...</p>');
 
         $("div.holder").fadeOut(300);
         $(".words").load('/words/' + $("#letters").val() + ' .word-holder');
