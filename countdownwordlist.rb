@@ -51,7 +51,7 @@ class CountdownWordList
   private
 
   def add(word)
-    @words[word[0]] << InitializedCountdownWord.new(word)
+    @words[word[0].downcase] << InitializedCountdownWord.new(word)
   end
 
   def search(letter)
