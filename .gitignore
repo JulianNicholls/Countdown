@@ -1,6 +1,12 @@
 *~
 *.swp
 *.bak
-wordlists/*
+wordlists/*.txt
+wordlists/*.tar
+wordlists/final
+wordlists/myfinal
+wordlists/misc
+wordlists/speller
+wordlists/src
 .sass*
 *.log
