@@ -1,0 +1,8 @@
+#! /bin/bash
+
+export LC_ALL=C
+./mk-list -d myfinal -v1 english british 80 | grep -v "'" | grep -v '[^A-Za-z]' | awk 'length($0) >=5 && length($0) <=16' >words516.txt
+awk '{print toupper($0)}' <words516.txt >uppered516.txt
+sort <uppered516.txt >sorted516.txt
+uniq <sorted516.txt >letterpress.txt
+

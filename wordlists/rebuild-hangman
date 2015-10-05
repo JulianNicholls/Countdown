@@ -1,0 +1,7 @@
+#! /bin/bash
+
+export LC_ALL=C
+./mk-list -d myfinal -v1 english british 60 | grep -v "'" | awk 'length($0) >=4 && length($0) <=9' >words49.txt
+awk '{print toupper($0)}' <words49.txt >uppered49.txt
+sort <uppered49.txt >sorted49.txt
+uniq <sorted49.txt >uniq49.txt

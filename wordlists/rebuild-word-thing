@@ -1,0 +1,8 @@
+#! /bin/bash
+
+export LC_ALL=C
+./mk-list -d myfinal -v1 english british 60 | grep -v "'" | grep -v '[^[:alpha:]]' | awk 'length($0) >=3 && length($0) <=12' >words312.txt
+awk '{print toupper($0)}' <words312.txt >uppered312.txt
+sort <uppered312.txt >sorted312.txt
+uniq <sorted312.txt >word-thing.txt
+
