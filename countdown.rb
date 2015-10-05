@@ -11,10 +11,10 @@ class CountdownSession
   #----------------------------------------------------------------------------
   # Load the words from the word list file
 
-  def initialize
+  def initialize(filename)
     print yellow, bold { 'Loading... ' }
 
-    @list = CountdownWordList.new 'cwords.txt'
+    @list = CountdownWordList.new filename
 
     # Display the number of words for each initial letter, 143K in total.
 
@@ -28,7 +28,7 @@ class CountdownSession
   def enter_letters
     loop do
       print bright_cyan, "\n\nLetters: ", white
-      @letters = gets.strip.downcase
+      @letters = $stdin.gets.strip.downcase
       break if @letters.length >= 8
     end
   end
@@ -98,7 +98,7 @@ end
 #----------------------------------------------------------------------------
 # Start here
 
-session = CountdownSession.new
+session = CountdownSession.new(ARGV[0] || 'cwords.txt')
 
 loop do
   session.enter_letters         # Get the letters that have been chosen
