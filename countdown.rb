@@ -88,6 +88,7 @@ class WrappingOutput
     @column = 0
   end
 
+  # Calculate the length, ignoring escape sequences
   def output_length
     @output.each.reduce(0) do |acc, item|
       acc + ((/\A\e\[.*m\z/ =~ item) ? 0 : item.length)
