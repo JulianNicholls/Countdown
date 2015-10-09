@@ -17,6 +17,7 @@ class CountdownWordList
 
   def initialize(filename = nil)
     @words = Hash.new { |hash, key| hash[key] = [] }
+    @lengths = Array.new(20, 0)
     load filename
   end
 
@@ -46,12 +47,17 @@ class CountdownWordList
 
   def debug
     @words.each_key { |ltr| printf "%c: %5d\n", ltr.upcase, @words[ltr].length }
+    puts
+    @lengths.each_with_index do |num, idx|
+      printf("%2d-letter words: %5d\n", idx, num) if num > 0
+    end
   end
 
   private
 
   def add(word)
     @words[word[0].downcase] << InitializedCountdownWord.new(word)
+    @lengths[word.size] += 1
   end
 
   def search(letter)

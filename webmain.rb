@@ -21,12 +21,12 @@ class CountdownApp < Sinatra::Application
 
   get('/css/style.css') { scss :style }
 
-  get '/' do    # Show the form
-    slim :index
-  end
+  get('/') { slim :index }
 
-  get '/words/:letters' do    # Return the words as formatted HTML
-    @words  = list.words_from(params[:letters])
+  # Return the words as formatted HTML
+
+  get '/words/:letters' do
+    @words = list.words_from(params[:letters])
 
     erb :words, layout: !request.xhr?
   end

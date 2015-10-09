@@ -10,11 +10,12 @@ class CountdownWord
   attr_reader :wmap
 
   def self.lettermap(word)
-    lmap = Hash.new(0)   # Empty map with automatic 0s
+    # Empty map with automatic 0s
+    lmap = Hash.new(0)
 
-    word.each_char { |let| lmap[let] += 1 }         # Count 1 more
+    word.each_char { |let| lmap[let] += 1 }
 
-    lmap         # Return map
+    lmap
   end
 
   # Initialize with the word, with no evaluation of the letter map.
@@ -51,7 +52,8 @@ class CountdownWord
       return false unless candidate.key?(let) && candidate[let] >= @wmap[let]
     end
 
-    true  # To have fallen through here, it must be possible
+    # To have fallen through here, it must be possible
+    true
   end
 
   # Return the word so that it can be easily output via print/puts
