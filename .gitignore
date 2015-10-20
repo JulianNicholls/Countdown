@@ -10,3 +10,4 @@ wordlists/speller
 wordlists/src
 .sass*
 *.log
+letterpress/

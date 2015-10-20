@@ -9,7 +9,7 @@ require './countdownwordlist'
 # Countdown for the Web via Sinatra
 class CountdownApp < Sinatra::Application
   puts 'Loading word list...'
-  @list = CountdownWordList.new 'cwords.txt'
+  @list = CountdownWordList.new 'countdown.words'
 
   class << self
     attr_reader :list

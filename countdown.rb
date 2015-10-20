@@ -99,7 +99,7 @@ end
 #----------------------------------------------------------------------------
 # Start here
 
-session = CountdownSession.new(ARGV[0] || 'cwords.txt')
+session = CountdownSession.new(ARGV[0] || 'countdown.words')
 
 loop do
   session.enter_letters         # Get the letters that have been chosen
