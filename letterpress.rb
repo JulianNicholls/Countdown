@@ -4,9 +4,10 @@ require 'term/ansicolor'
 
 require 'countdownwordlist'
 require 'output_wrapper'
+require 'confirmation'
 
 # Run a text Countdown solving session
-class CountdownSession
+class LetterpressSession
   include Term::ANSIColor
 
   #----------------------------------------------------------------------------
@@ -30,7 +31,13 @@ class CountdownSession
     loop do
       print bright_cyan, "\n\nLetters: ", white
       @letters = $stdin.gets.strip.downcase
-      break if @letters.length >= 8
+      break if @letters.length >= 20
+
+      # TODO: Remove debug code
+      @letters = 'tswzcmkmhdmcbnawnuxpkglie'
+      break
+
+      print 'Not enough for a Letterpress game'
     end
   end
 
@@ -40,11 +47,23 @@ class CountdownSession
   def search
     system('clear')
 
-    print red, bold, "\n#{@letters.upcase} - Searching... "
+    print red, bold, "\n#{@letters.upcase} (@letters.size) - Searching... "
 
     @wordlist = @list.words_from(@letters)
 
     printf "#{@wordlist.length} Words", reset
+  end
+
+  def save
+    filename = "letterpress/#{@letters[0, 5]}.txt"
+
+    if !File.exist?(filename) || Confirm.ask('Overwrite')
+      open(filename, 'w') do |file|
+        @wordlist.each_slice(10) { |ten| file.puts ten.join ', ' }
+      end
+    end
+
+    puts "#{filename} written"
   end
 
   #----------------------------------------------------------------------------
@@ -56,10 +75,12 @@ class CountdownSession
 
       list(words)
     end
+
+    puts
   end
 
   def list(words)
-    output = WrappingOutput.new(80, 11)
+    output = WrappingOutput.new(150, 11)
 
     words.each { |word| output.print bright_cyan, "#{word}, " }
   end
@@ -69,10 +90,11 @@ end
 #----------------------------------------------------------------------------
 # Start here
 
-session = CountdownSession.new(ARGV[0] || 'countdown.words')
+session = LetterpressSession.new(ARGV[0] || 'letterpress.words')
 
 loop do
   session.enter_letters         # Get the letters that have been chosen
   session.search                # Search for what can be built from them
   session.show                  # List all the words, split by length
+  session.save if Confirm.ask 'Save words'
 end
