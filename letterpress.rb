@@ -33,10 +33,6 @@ class LetterpressSession
       @letters = $stdin.gets.strip.downcase
       break if @letters.length >= 20
 
-      # TODO: Remove debug code
-      @letters = 'tswzcmkmhdmcbnawnuxpkglie'
-      break
-
       print 'Not enough for a Letterpress game'
     end
   end
@@ -54,6 +50,7 @@ class LetterpressSession
     printf "#{@wordlist.length} Words", reset
   end
 
+  # :reek:NestedIterators = Two is fine AFAIC
   def save
     filename = "letterpress/#{@letters[0, 5]}.txt"
 
