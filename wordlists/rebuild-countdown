@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export LC-ALL=C
+export LC_ALL=C
 ./mk-list -d myfinal -v1 english british 80 | grep -v "'" | awk 'length($0) >=5 && length($0) <=9' >words59.txt
 awk '{print tolower($0)}' <words59.txt >lowered59.txt
 sort <lowered59.txt >sorted59.txt

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export LC-ALL=C
+export LC_ALL=C
 ./mk-list -d myfinal -v1 english british 80 | grep -v "'" | grep -v '[^[:alpha:]]' | awk 'length($0) >=4 && length($0) <=14' >words414.txt
 awk '{print toupper($0)}' <words414.txt >uppered414.txt
 sort <uppered414.txt >sorted414.txt
