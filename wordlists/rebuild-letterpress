@@ -1,10 +1,10 @@
 #! /bin/bash
 
 export LC_ALL=C
-./mk-list -d myfinal -v1 english british 80 | grep -v "'" | grep -v '[^A-Za-z]' | awk 'length($0) >=8 && length($0) <=18' >words818.txt
-awk '{print toupper($0)}' <words818.txt >uppered818.txt
-sort <uppered818.txt >sorted818.txt
-uniq <sorted818.txt >letterpress.txt
+./mk-list -d myfinal -v1 english british 80 | grep -v "'" | grep -v '[^A-Za-z]' | awk 'length($0) >= 7 && length($0) <= 18' >words718.txt
+awk '{print toupper($0)}' <words718.txt >uppered718.txt
+sort <uppered718.txt >sorted718.txt
+uniq <sorted718.txt >letterpress.txt
 
-rm words818.txt uppered818.txt sorted818.txt
+rm words718.txt uppered718.txt sorted718.txt
 
