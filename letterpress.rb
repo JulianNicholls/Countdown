@@ -43,7 +43,7 @@ class LetterpressSession
   def search
     system('clear')
 
-    print red, bold, "\n#{@letters.upcase} (@letters.size) - Searching... "
+    print red, bold, "\n#{@letters.upcase} (#{@letters.size}) - Searching... "
 
     @wordlist = @list.words_from(@letters)
 
