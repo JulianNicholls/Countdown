@@ -6,7 +6,7 @@ require 'countdownwordlist'
 require 'output_wrapper'
 require 'confirmation'
 
-# Run a text Countdown solving session
+# Run a Letterpress session
 class LetterpressSession
   include Term::ANSIColor
 
@@ -82,7 +82,6 @@ class LetterpressSession
     words.each { |word| output.print bright_cyan, "#{word}, " }
   end
 end
-
 
 #----------------------------------------------------------------------------
 # Start here

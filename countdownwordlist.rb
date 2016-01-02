@@ -43,7 +43,8 @@ class CountdownWordList
     list.flatten.sort
   end
 
-  # Show the number of words in each letter section of the hash.
+  # Show the number of words in each letter section of the hash and also the
+  # number of each length of word.
 
   def debug
     @words.each_key { |ltr| printf "%c: %5d\n", ltr.upcase, @words[ltr].length }
