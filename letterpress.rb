@@ -54,7 +54,7 @@ class LetterpressSession
   def save
     filename = "letterpress/#{@letters[0, 5]}.txt"
 
-    if !File.exist?(filename) || Confirm.ask('Overwrite')
+    if !File.exist?(filename) || Confirm.askYN('Overwrite')
       open(filename, 'w') do |file|
         @wordlist.each_slice(10) { |ten| file.puts ten.join ', ' }
       end
@@ -92,5 +92,5 @@ loop do
   session.enter_letters         # Get the letters that have been chosen
   session.search                # Search for what can be built from them
   session.show                  # List all the words, split by length
-  session.save if Confirm.ask 'Save words'
+  session.save if Confirm.askYN 'Save words'
 end
