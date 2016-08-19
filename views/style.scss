@@ -20,6 +20,10 @@ img.center {
     margin: 20px auto;
 }
 
+.main {
+   min-height: calc(100vh - 190px);
+}
+
 form {
     min-height: 320px;
     background: url('../images/countdown.jpg') no-repeat;
@@ -71,7 +75,7 @@ div#header-9 { background: #800; }  // Red header for 9 letter words
 footer {
     margin-top: 20px;
     padding: 10px 0 0 10px;
-    border-top: 1px solid #aaa;
+    border-top: 1px solid #eee;
     background-color: #ddd;
     color: black;
 
