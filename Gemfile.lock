@@ -3,7 +3,7 @@ GEM
   specs:
     daemons (1.2.6)
     eventmachine (1.2.5)
-    ffi (1.9.21)
+    ffi (1.13.1)
     json (2.3.0)
     multi_json (1.15.0)
     mustermann (1.1.1)
